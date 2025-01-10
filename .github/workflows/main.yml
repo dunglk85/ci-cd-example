@@ -32,6 +32,13 @@ jobs:
       - name: Publish
         run: dotnet publish ./CurrentTimeService.sln --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
         
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_54B87EFB0DF14D30B41239B597AA2B86 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_0811737014DA4845A13C260966F3C356 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5CAFB68CD1604423AA4ECEAC8C067560 }}
+          
       - name: Deployment
         uses: azure/webapps-deploy@v2
         with:
